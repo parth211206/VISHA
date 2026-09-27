@@ -1,0 +1,123 @@
+{
+  "generated_at": "2026-09-26T10:01:48.872114+05:30",
+  "dataset_root": "C:\\AI_ML_Project\\Snake Images",
+  "documentation_root": "C:\\AI_ML_Project\\Snake Images\\dataset_documentation",
+  "total_images": 2044,
+  "readable_images": 2044,
+  "images_with_validation_errors": 0,
+  "supported_extensions": [
+    ".bmp",
+    ".jpeg",
+    ".jpg",
+    ".png",
+    ".tif",
+    ".tiff",
+    ".webp"
+  ],
+  "extensions_found": {
+    "jpg": 2041,
+    "jpeg": 2,
+    "png": 1
+  },
+  "split_counts": {
+    "test": 269,
+    "train": 1775
+  },
+  "folder_label_counts": {
+    "Non Venomous": 843,
+    "Venomous": 1201
+  },
+  "split_label_counts": {
+    "test / Non Venomous": 128,
+    "test / Venomous": 141,
+    "train / Non Venomous": 715,
+    "train / Venomous": 1060
+  },
+  "duplicate_groups_exact_sha256": 8,
+  "files_in_exact_duplicate_groups": 16,
+  "possible_train_test_exact_hash_leakage_groups": 5,
+  "common_image_dimensions_top_20": [
+    {
+      "width": 400,
+      "height": 400,
+      "count": 2029
+    },
+    {
+      "width": 600,
+      "height": 399,
+      "count": 2
+    },
+    {
+      "width": 660,
+      "height": 371,
+      "count": 1
+    },
+    {
+      "width": 768,
+      "height": 1024,
+      "count": 1
+    },
+    {
+      "width": 208,
+      "height": 140,
+      "count": 1
+    },
+    {
+      "width": 220,
+      "height": 282,
+      "count": 1
+    },
+    {
+      "width": 578,
+      "height": 305,
+      "count": 1
+    },
+    {
+      "width": 636,
+      "height": 593,
+      "count": 1
+    },
+    {
+      "width": 268,
+      "height": 188,
+      "count": 1
+    },
+    {
+      "width": 650,
+      "height": 433,
+      "count": 1
+    },
+    {
+      "width": 640,
+      "height": 445,
+      "count": 1
+    },
+    {
+      "width": 354,
+      "height": 530,
+      "count": 1
+    },
+    {
+      "width": 409,
+      "height": 252,
+      "count": 1
+    },
+    {
+      "width": 800,
+      "height": 547,
+      "count": 1
+    },
+    {
+      "width": 640,
+      "height": 454,
+      "count": 1
+    }
+  ],
+  "notes": [
+    "Folder labels are recorded as dataset-provided labels.",
+    "Species/genus/taxonomy are NOT inferred from filenames.",
+    "No original image files were modified.",
+    "Exact duplicate detection uses SHA-256.",
+    "The train/test leakage check detects exact duplicate files by SHA-256 only; it does not detect visually similar near-duplicates."
+  ]
+}

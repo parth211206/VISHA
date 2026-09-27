@@ -1,0 +1,14 @@
+{
+  "timestamp": "2026-09-27T12:07:38.754762",
+  "pipeline_version": "1.0.0",
+  "counts": {
+    "input_records": 9766,
+    "after_class_reptilia": 5484,
+    "after_country_india": 4115,
+    "after_snake_genera_filter": 974,
+    "records_with_coordinates": 154,
+    "unmapped_count": 310,
+    "after_deduplication": 974,
+    "output_records": 974
+  }
+}

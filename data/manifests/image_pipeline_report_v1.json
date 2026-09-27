@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-09-27T12:07:39.233754",
+  "pipeline_version": "1.0.0",
+  "total_images": 2044,
+  "leakage_excluded_count": 5,
+  "intra_split_duplicates": 2,
+  "suspicious_review_required": 2,
+  "train_usable": 1773,
+  "test_usable": 264
+}

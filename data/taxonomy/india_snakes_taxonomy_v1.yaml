@@ -1,0 +1,470 @@
+metadata:
+  version: "1.0.0"
+  created: "2026-09-27"
+  species_count: 29
+  sources:
+    - "WHO Guidelines for the Management of Snakebite, 2nd edition, 2016"
+    - "MoHFW India Standard Treatment Guidelines for Snakebite, 2022"
+    - "NCDC National Action Plan for Prevention and Control of Snakebite Envenoming"
+    - "SnakeCLEF 2021 species list"
+    - "Reptile Database (reptile-database.org)"
+  disclaimer: "Taxonomy is for reference only. Do not use for clinical decisions without clinician confirmation."
+
+species:
+  - species: "Naja naja"
+    accepted_name: "Naja naja"
+    common_name: "Indian Cobra / Spectacled Cobra"
+    genus: "Naja"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: ["Naja kaouthia", "Naja oxiana"]
+    snakeclef_binomial: "Naja naja"
+    notes: "One of the Big Four; responsible for significant mortality"
+    sources:
+      - "WHO SEARO Snakebite Guidelines 2016"
+      - "MoHFW India Snakebite Standard Treatment Guidelines 2022"
+  
+  - species: "Bungarus caeruleus"
+    accepted_name: "Bungarus caeruleus"
+    common_name: "Common Krait"
+    genus: "Bungarus"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: ["Lycodon aulicus"]
+    snakeclef_binomial: "Bungarus caeruleus"
+    notes: "One of the Big Four. Often bites people sleeping on the floor."
+    sources:
+      - "WHO SEARO Snakebite Guidelines 2016"
+
+  - species: "Daboia russelii"
+    accepted_name: "Daboia russelii"
+    common_name: "Russell's Viper"
+    genus: "Daboia"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: ["Eryx conicus"]
+    snakeclef_binomial: "Daboia russelii"
+    notes: "One of the Big Four. Causes acute kidney injury."
+    sources:
+      - "WHO SEARO Snakebite Guidelines 2016"
+
+  - species: "Echis carinatus"
+    accepted_name: "Echis carinatus"
+    common_name: "Saw-scaled Viper"
+    genus: "Echis"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Arid and semi-arid regions"]
+    confusion_pairs: []
+    snakeclef_binomial: "Echis carinatus"
+    notes: "One of the Big Four. Coagulopathy is common."
+    sources:
+      - "WHO SEARO Snakebite Guidelines 2016"
+
+  - species: "Naja kaouthia"
+    accepted_name: "Naja kaouthia"
+    common_name: "Monocled Cobra"
+    genus: "Naja"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Eastern India", "North East"]
+    confusion_pairs: ["Naja naja"]
+    snakeclef_binomial: "Naja kaouthia"
+    notes: ""
+    sources:
+      - "WHO SEARO Snakebite Guidelines 2016"
+
+  - species: "Naja oxiana"
+    accepted_name: "Naja oxiana"
+    common_name: "Central Asian Cobra"
+    genus: "Naja"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Northwest India", "Kashmir"]
+    confusion_pairs: ["Naja naja"]
+    snakeclef_binomial: "Naja oxiana"
+    notes: ""
+    sources:
+      - "WHO SEARO Snakebite Guidelines 2016"
+
+  - species: "Bungarus fasciatus"
+    accepted_name: "Bungarus fasciatus"
+    common_name: "Banded Krait"
+    genus: "Bungarus"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "medium"
+    india_present: true
+    india_states: ["East and North East"]
+    confusion_pairs: []
+    snakeclef_binomial: "Bungarus fasciatus"
+    notes: ""
+    sources: []
+
+  - species: "Bungarus niger"
+    accepted_name: "Bungarus niger"
+    common_name: "Greater Black Krait"
+    genus: "Bungarus"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["East and North East"]
+    confusion_pairs: []
+    snakeclef_binomial: "Bungarus niger"
+    notes: ""
+    sources: []
+
+  - species: "Bungarus sindanus"
+    accepted_name: "Bungarus sindanus"
+    common_name: "Sind Krait"
+    genus: "Bungarus"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Western India"]
+    confusion_pairs: ["Bungarus caeruleus"]
+    snakeclef_binomial: "Bungarus sindanus"
+    notes: ""
+    sources: []
+
+  - species: "Echis sochureki"
+    accepted_name: "Echis sochureki"
+    common_name: "Sochurek's Saw-scaled Viper"
+    genus: "Echis"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Northwest India"]
+    confusion_pairs: ["Echis carinatus"]
+    snakeclef_binomial: "Echis sochureki"
+    notes: "Often considered a subspecies of E. carinatus"
+    sources: []
+
+  - species: "Echis carinatus sochureki"
+    accepted_name: "Echis sochureki"
+    common_name: "Sochurek's Saw-scaled Viper"
+    genus: "Echis"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Northwest India"]
+    confusion_pairs: ["Echis carinatus"]
+    snakeclef_binomial: "Echis carinatus sochureki"
+    notes: "Synonym mapped to E. sochureki"
+    sources: []
+
+  - species: "Daboia siamensis"
+    accepted_name: "Daboia siamensis"
+    common_name: "Eastern Russell's Viper"
+    genus: "Daboia"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["North East"]
+    confusion_pairs: ["Daboia russelii"]
+    snakeclef_binomial: "Daboia siamensis"
+    notes: ""
+    sources: []
+
+  - species: "Trimeresurus malabaricus"
+    accepted_name: "Trimeresurus malabaricus"
+    common_name: "Malabar Pit Viper"
+    genus: "Trimeresurus"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "medium"
+    india_present: true
+    india_states: ["Western Ghats"]
+    confusion_pairs: []
+    snakeclef_binomial: "Trimeresurus malabaricus"
+    notes: ""
+    sources: []
+
+  - species: "Trimeresurus gramineus"
+    accepted_name: "Trimeresurus gramineus"
+    common_name: "Bamboo Pit Viper"
+    genus: "Trimeresurus"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "medium"
+    india_present: true
+    india_states: ["Peninsular India"]
+    confusion_pairs: []
+    snakeclef_binomial: "Trimeresurus gramineus"
+    notes: ""
+    sources: []
+
+  - species: "Trimeresurus salazar"
+    accepted_name: "Trimeresurus salazar"
+    common_name: "Salazar's Pit Viper"
+    genus: "Trimeresurus"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["North East"]
+    confusion_pairs: []
+    snakeclef_binomial: "Trimeresurus salazar"
+    notes: ""
+    sources: []
+
+  - species: "Hypnale hypnale"
+    accepted_name: "Hypnale hypnale"
+    common_name: "Hump-nosed Pit Viper"
+    genus: "Hypnale"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Western Ghats", "South India"]
+    confusion_pairs: []
+    snakeclef_binomial: "Hypnale hypnale"
+    notes: "Can cause acute kidney injury."
+    sources: []
+
+  - species: "Ovophis monticola"
+    accepted_name: "Ovophis monticola"
+    common_name: "Mountain Pit Viper"
+    genus: "Ovophis"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "medium"
+    india_present: true
+    india_states: ["Himalayas", "North East"]
+    confusion_pairs: []
+    snakeclef_binomial: "Ovophis monticola"
+    notes: ""
+    sources: []
+
+  - species: "Hydrophis schistosus"
+    accepted_name: "Hydrophis schistosus"
+    common_name: "Beaked Sea Snake"
+    genus: "Hydrophis"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Coastal"]
+    confusion_pairs: []
+    snakeclef_binomial: "Hydrophis schistosus"
+    notes: "Highly venomous."
+    sources: []
+
+  - species: "Hydrophis platurus"
+    accepted_name: "Hydrophis platurus"
+    common_name: "Yellow-bellied Sea Snake"
+    genus: "Hydrophis"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Coastal"]
+    confusion_pairs: []
+    snakeclef_binomial: "Hydrophis platurus"
+    notes: ""
+    sources: []
+
+  - species: "Hydrophis curtus"
+    accepted_name: "Hydrophis curtus"
+    common_name: "Shaw's Sea Snake"
+    genus: "Hydrophis"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Coastal"]
+    confusion_pairs: []
+    snakeclef_binomial: "Hydrophis curtus"
+    notes: ""
+    sources: []
+
+  - species: "Laticauda colubrina"
+    accepted_name: "Laticauda colubrina"
+    common_name: "Banded Sea Krait"
+    genus: "Laticauda"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "medium"
+    india_present: true
+    india_states: ["Coastal"]
+    confusion_pairs: []
+    snakeclef_binomial: "Laticauda colubrina"
+    notes: ""
+    sources: []
+
+  - species: "Ophiophagus hannah"
+    accepted_name: "Ophiophagus hannah"
+    common_name: "King Cobra"
+    genus: "Ophiophagus"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "high"
+    india_present: true
+    india_states: ["Western Ghats", "North East", "Andaman"]
+    confusion_pairs: ["Ptyas mucosa"]
+    snakeclef_binomial: "Ophiophagus hannah"
+    notes: "Requires specific antivenom."
+    sources: []
+
+  - species: "Calliophis melanurus"
+    accepted_name: "Calliophis melanurus"
+    common_name: "Indian Coral Snake"
+    genus: "Calliophis"
+    family: "Elapidae"
+    order: "Squamata"
+    venom_category: "neurotoxic"
+    medical_relevance: "medium"
+    india_present: true
+    india_states: ["Peninsular India"]
+    confusion_pairs: []
+    snakeclef_binomial: "Calliophis melanurus"
+    notes: ""
+    sources: []
+
+  - species: "Pseudocerastes persicus"
+    accepted_name: "Pseudocerastes persicus"
+    common_name: "Persian Horned Viper"
+    genus: "Pseudocerastes"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["Northwest margin"]
+    confusion_pairs: []
+    snakeclef_binomial: "Pseudocerastes persicus"
+    notes: ""
+    sources: []
+
+  - species: "Macrovipera lebetinus"
+    accepted_name: "Macrovipera lebetinus"
+    common_name: "Levantine Viper"
+    genus: "Macrovipera"
+    family: "Viperidae"
+    order: "Squamata"
+    venom_category: "hemotoxic"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["Kashmir"]
+    confusion_pairs: []
+    snakeclef_binomial: "Macrovipera lebetinus"
+    notes: ""
+    sources: []
+
+  # Non-venomous but commonly misidentified
+  - species: "Python molurus"
+    accepted_name: "Python molurus"
+    common_name: "Indian Rock Python"
+    genus: "Python"
+    family: "Pythonidae"
+    order: "Squamata"
+    venom_category: "non_venomous"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: []
+    snakeclef_binomial: "Python molurus"
+    notes: "Non-venomous"
+    sources: []
+
+  - species: "Ptyas mucosa"
+    accepted_name: "Ptyas mucosa"
+    common_name: "Indian Rat Snake"
+    genus: "Ptyas"
+    family: "Colubridae"
+    order: "Squamata"
+    venom_category: "non_venomous"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: ["Naja naja", "Ophiophagus hannah"]
+    snakeclef_binomial: "Ptyas mucosa"
+    notes: "Non-venomous"
+    sources: []
+
+  - species: "Xenochrophis piscator"
+    accepted_name: "Fowlea piscator"
+    common_name: "Checkered Keelback"
+    genus: "Fowlea"
+    family: "Colubridae"
+    order: "Squamata"
+    venom_category: "non_venomous"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: []
+    snakeclef_binomial: "Xenochrophis piscator"
+    notes: "Synonym mapped to Fowlea piscator"
+    sources: []
+    
+  - species: "Fowlea piscator"
+    accepted_name: "Fowlea piscator"
+    common_name: "Checkered Keelback"
+    genus: "Fowlea"
+    family: "Colubridae"
+    order: "Squamata"
+    venom_category: "non_venomous"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: []
+    snakeclef_binomial: "Fowlea piscator"
+    notes: "Non-venomous"
+    sources: []
+
+  - species: "Lycodon aulicus"
+    accepted_name: "Lycodon aulicus"
+    common_name: "Common Wolf Snake"
+    genus: "Lycodon"
+    family: "Colubridae"
+    order: "Squamata"
+    venom_category: "non_venomous"
+    medical_relevance: "low"
+    india_present: true
+    india_states: ["All states"]
+    confusion_pairs: ["Bungarus caeruleus"]
+    snakeclef_binomial: "Lycodon aulicus"
+    notes: "Non-venomous"
+    sources: []

@@ -1,0 +1,90 @@
+version: "3.9"
+
+services:
+  # ─── PostgreSQL + PostGIS ────────────────────────────────────────────────────
+  db:
+    image: postgis/postgis:15-3.4
+    container_name: snakebite_db
+    environment:
+      POSTGRES_USER: snakebite
+      POSTGRES_PASSWORD: snakebite_dev_password
+      POSTGRES_DB: snakebite_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U snakebite -d snakebite_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ─── FastAPI Backend ─────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: ../docker/Dockerfile.backend
+    container_name: snakebite_backend
+    environment:
+      APP_ENV: development
+      DATABASE_URL: postgresql+asyncpg://snakebite:snakebite_dev_password@db:5432/snakebite_dev
+      RAW_DATASET_ROOT: /data/raw/Snake Images
+      RAW_OCCURRENCE_CSV: /data/raw/occurrence.csv
+      RAW_SNAKECLEF_METADATA_CSV: /data/raw/SnakeCLEF2021_min-train_metadata_PROD.csv
+      RAW_SPECIES_COUNTRY_MAPPING_CSV: /data/raw/species_to_country_mapping.csv
+      DERIVED_DATA_ROOT: /data/derived
+      MANIFESTS_DIR: /data/derived/manifests
+      TAXONOMY_FILE: /data/derived/taxonomy/india_snakes_taxonomy_v1.yaml
+      CLINICAL_KNOWLEDGE_FILE: /data/derived/clinical/clinical_knowledge_v1.yaml
+      ANTIVENOM_REFERENCE_FILE: /data/derived/antivenom/antivenom_reference_v1.yaml
+      ML_MODEL_DIR: /data/ml_artifacts
+      ML_DEVICE: cpu
+    volumes:
+      # Raw data (read-only inside container)
+      - "C:/AI_ML_Project/Snake Images:/data/raw/Snake Images:ro"
+      - "C:/AI_ML_Project/occurrence.csv:/data/raw/occurrence.csv:ro"
+      - "C:/AI_ML_Project/SnakeCLEF2021_min-train_metadata_PROD.csv:/data/raw/SnakeCLEF2021_min-train_metadata_PROD.csv:ro"
+      - "C:/AI_ML_Project/species_to_country_mapping.csv:/data/raw/species_to_country_mapping.csv:ro"
+      # Derived data (writable)
+      - ./data:/data/derived
+      - ./ml/artifacts:/data/ml_artifacts
+      # Source code (for development hot reload)
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # ─── React Frontend (dev) ────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ../docker/Dockerfile.frontend
+    container_name: snakebite_frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules  # anonymous volume prevents host overwrite
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    command: npm run dev -- --host 0.0.0.0
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: snakebite_network

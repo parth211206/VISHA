@@ -1,0 +1,9 @@
+app:
+  env: development
+  debug: true
+  log_level: INFO
+database:
+  pool_size: 5
+ml:
+  device: cpu
+  batch_size: 16

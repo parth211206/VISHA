@@ -1,0 +1,5 @@
+﻿split,folder_label,image_count
+test,Non Venomous,128
+test,Venomous,141
+train,Non Venomous,715
+train,Venomous,1060

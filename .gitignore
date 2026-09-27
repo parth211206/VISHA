@@ -1,0 +1,123 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment files (keep .env.example)
+.env.local
+.env.development
+.env.production
+.env.test
+
+# PyTest
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff / Black
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# ML artifacts (large binaries)
+ml/artifacts/
+ml/runs/
+ml/checkpoints/
+*.pt
+*.pth
+*.onnx
+*.pkl
+wandb/
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/node_modules/
+*.tsbuildinfo
+.npm
+
+# Docker
+docker/data/
+docker/postgres/
+
+# Database
+*.sqlite
+*.db
+*.sql.gz
+alembic/__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Temporary / scratch
+tmp/
+temp/
+scratch/
+
+# Data pipeline outputs (large, reproducible)
+data/processed/**/*.parquet
+data/processed/**/*.feather
+
+# NEVER IGNORE:
+# - data/manifests/  (small CSVs, version controlled)
+# - data/taxonomy/   (YAML reference files)
+# - data/clinical/   (YAML reference files)
+# - data/antivenom/  (YAML reference files)
+# - Original datasets (they are READ-ONLY, not in this repo anyway)
