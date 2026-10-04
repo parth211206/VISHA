@@ -1,11 +1,11 @@
-import numpy as np
 from pathlib import Path
+
 try:
     import torch
-    import torch.nn as nn
-    import torch.optim as optim
+    from torch import nn, optim
 except ImportError:
     nn = object
+
 
 class TemperatureScaler(nn.Module if nn is not object else object):
     def __init__(self):

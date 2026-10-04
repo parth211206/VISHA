@@ -1,17 +1,20 @@
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+
 from PIL import Image
+
 try:
-    import torch
     import numpy as np
+    import torch
 except ImportError:
     pass
 
-from ml.models.binary_classifier import BinarySnakeClassifier
-from ml.models.species_interface import SpeciesClassifierInterface, SpeciesPrediction
-from ml.models.calibration import TemperatureScaler
 from ml.evaluation.ood_detector import MahalanobisOODDetector
+from ml.models.binary_classifier import BinarySnakeClassifier
+from ml.models.calibration import TemperatureScaler
+from ml.models.species_interface import SpeciesClassifierInterface, SpeciesPrediction
+
 
 @dataclass
 class InferencePrediction:
@@ -31,6 +34,7 @@ class InferencePrediction:
     low_confidence_warning: bool
     clinical_disclaimer: str
 
+
 class SnakeVisionEngine:
     def __init__(
         self,
@@ -47,7 +51,7 @@ class SnakeVisionEngine:
         self.species_classifier = species_classifier
         self.device = device
         self.min_confidence = min_confidence
-        
+
         self.binary_classifier.to(self.device)
         self.binary_classifier.eval()
         if self.calibrator:
@@ -56,32 +60,32 @@ class SnakeVisionEngine:
 
     def predict(self, image: Image, transform=None) -> InferencePrediction:
         start_time = datetime.now()
-        
+
         if transform is None:
             # dummy transform for fallback if not provided
             pass
-            
+
         tensor = transform(image).unsqueeze(0).to(self.device)
-        
+
         with torch.no_grad():
             # Features for OOD
             features = self.binary_classifier.backbone.features(tensor)
             features = self.binary_classifier.backbone.avgpool(features)
             features_flat = torch.flatten(features, 1).cpu().numpy()
-            
+
             logits = self.binary_classifier(tensor)
-            
+
             if self.calibrator:
                 logits = self.calibrator(logits)
                 is_calibrated = True
             else:
                 is_calibrated = False
-                
+
             probs = torch.softmax(logits, dim=1).cpu().numpy()[0]
-            
+
         venomous_prob = float(probs[1])
         non_venomous_prob = float(probs[0])
-        
+
         if venomous_prob >= non_venomous_prob:
             label = "venomous"
             conf = venomous_prob
@@ -123,7 +127,7 @@ class SnakeVisionEngine:
             timestamp=end_time,
             processing_time_ms=processing_time,
             low_confidence_warning=conf < self.min_confidence,
-            clinical_disclaimer="CLINICAL DECISION SUPPORT ONLY. Not a diagnosis."
+            clinical_disclaimer="CLINICAL DECISION SUPPORT ONLY. Not a diagnosis.",
         )
 
     def predict_batch(self, images: list[Image]) -> list[InferencePrediction]:
@@ -132,6 +136,6 @@ class SnakeVisionEngine:
     @classmethod
     def load(cls, model_dir: Path, config: dict) -> "SnakeVisionEngine":
         pass
-    
+
     def get_engine_status(self) -> dict:
         return {}

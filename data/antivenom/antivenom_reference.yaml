@@ -1,0 +1,11 @@
+- product_name: null
+  manufacturer: null
+  target_species: []
+  geographic_scope: null
+  formulation: null
+  source_citation: "03-clinical-knowledge-antivenom-and-surveillance.md"
+  source_version: "PLACEHOLDER"
+  source_date: "PLACEHOLDER"
+  evidence_status: "SOURCE_REQUIRED"
+  notes: "No real antivenom reference data provided. This entry is a placeholder awaiting authoritative source material."
+  verification_status: "UNVERIFIED"

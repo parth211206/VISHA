@@ -1,7 +1,9 @@
-from pydantic import BaseModel, ConfigDict, Field
 from datetime import datetime
+from typing import Any, Dict, Optional
 from uuid import UUID
-from typing import Optional, List, Dict, Any
+
+from pydantic import BaseModel, ConfigDict, Field
+
 
 class CaseBase(BaseModel):
     patient_age_years: Optional[int] = None
@@ -16,12 +18,15 @@ class CaseBase(BaseModel):
     snake_description: Optional[str] = None
     symptoms: Dict[str, Any] = Field(default_factory=dict)
 
+
 class CaseCreate(CaseBase):
     pass
+
 
 class CaseUpdate(CaseBase):
     status: Optional[str] = None
     assigned_to: Optional[UUID] = None
+
 
 class CaseResponse(CaseBase):
     id: UUID
@@ -33,5 +38,5 @@ class CaseResponse(CaseBase):
     confirmed_at: Optional[datetime]
     created_at: datetime
     updated_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)

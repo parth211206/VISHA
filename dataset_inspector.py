@@ -5,10 +5,10 @@ Snake Dataset Inspector
 Scans the ORIGINAL snake image dataset without modifying it.
 
 Default dataset:
-    C:\AI_ML_Project\Snake Images
+    C:\\AI_ML_Project\\Snake Images
 
 Output:
-    <dataset_root>\dataset_documentation\
+    <dataset_root>\\dataset_documentation\
         dataset_manifest.csv
         dataset_report.json
         validation_report.json
@@ -19,7 +19,7 @@ Output:
 
 Usage:
     python dataset_inspector.py
-    python dataset_inspector.py "C:\AI_ML_Project\Snake Images"
+    python dataset_inspector.py "C:\\AI_ML_Project\\Snake Images"
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ from datetime import datetime
 from pathlib import Path
 
 try:
-    from PIL import Image, ImageOps, ImageDraw, ImageFont
+    from PIL import Image, ImageDraw, ImageFont, ImageOps
 except ImportError:
     print("Pillow is required.")
     print("Install it with: python -m pip install Pillow")
@@ -100,7 +100,7 @@ def make_contact_sheet(records, output_path: Path, title: str):
             px = x + (cell_w - img.width) // 2
             py = y + (THUMBNAIL_SIZE[1] - img.height) // 2
             sheet.paste(img, (px, py))
-            caption = f'{rec["image_id"]} | {rec["filename"][:24]}'
+            caption = f"{rec['image_id']} | {rec['filename'][:24]}"
             draw.text((x + 3, y + THUMBNAIL_SIZE[1] + 4), caption, fill="black", font=font)
         except Exception:
             draw.text((x + 10, y + 50), "UNREADABLE", fill="black", font=font)
@@ -123,7 +123,8 @@ def main():
     samples_dir.mkdir(exist_ok=True)
 
     image_paths = sorted(
-        p for p in root.rglob("*")
+        p
+        for p in root.rglob("*")
         if p.is_file()
         and "dataset_documentation" not in p.parts
         and p.suffix.lower() in IMAGE_EXTENSIONS
@@ -179,12 +180,14 @@ def main():
         except Exception as e:
             errors.append(f"hash_failed: {type(e).__name__}")
 
-        validation.append({
-            "image_id": image_id,
-            "relative_path": relative_path,
-            "status": "ERROR" if errors else "OK",
-            "errors": "; ".join(errors),
-        })
+        validation.append(
+            {
+                "image_id": image_id,
+                "relative_path": relative_path,
+                "status": "ERROR" if errors else "OK",
+                "errors": "; ".join(errors),
+            }
+        )
 
         manifest.append(record)
         class_counts[label] += 1
@@ -201,11 +204,13 @@ def main():
             duplicate_groups += 1
             duplicate_files += len(paths)
             for p in paths:
-                duplicate_rows.append({
-                    "sha256": digest,
-                    "duplicate_group_size": len(paths),
-                    "relative_path": p,
-                })
+                duplicate_rows.append(
+                    {
+                        "sha256": digest,
+                        "duplicate_group_size": len(paths),
+                        "relative_path": p,
+                    }
+                )
 
     # Leakage check: exact same hash appearing across train/test
     hash_to_splits = defaultdict(set)
@@ -213,16 +218,21 @@ def main():
         if rec["sha256"]:
             hash_to_splits[rec["sha256"]].add(rec["split"])
 
-    leakage_hashes = {
-        h: splits for h, splits in hash_to_splits.items()
-        if len(splits) > 1
-    }
+    leakage_hashes = {h: splits for h, splits in hash_to_splits.items() if len(splits) > 1}
 
     # Write manifest
     manifest_fields = [
-        "image_id", "split", "folder_label", "relative_path",
-        "absolute_path", "filename", "extension", "width",
-        "height", "file_size_bytes", "sha256"
+        "image_id",
+        "split",
+        "folder_label",
+        "relative_path",
+        "absolute_path",
+        "filename",
+        "extension",
+        "width",
+        "height",
+        "file_size_bytes",
+        "sha256",
     ]
     with (out / "dataset_manifest.csv").open("w", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=manifest_fields)
@@ -242,11 +252,7 @@ def main():
         writer = csv.DictWriter(f, fieldnames=fields)
         writer.writeheader()
         for (split, label), count in sorted(split_label_counts.items()):
-            writer.writerow({
-                "split": split,
-                "folder_label": label,
-                "image_count": count
-            })
+            writer.writerow({"split": split, "folder_label": label, "image_count": count})
 
     # Duplicate report
     with (out / "duplicate_report.csv").open("w", newline="", encoding="utf-8-sig") as f:
@@ -261,21 +267,17 @@ def main():
         selected = list(records)
         rng.shuffle(selected)
         selected = selected[:SAMPLE_PER_GROUP]
-        filename = (
-            f"{split}_{label.lower().replace(' ', '_')}_contact_sheet.jpg"
-        )
+        filename = f"{split}_{label.lower().replace(' ', '_')}_contact_sheet.jpg"
         make_contact_sheet(
             selected,
             samples_dir / filename,
-            f"{split} / {label} | {len(selected)} representative images"
+            f"{split} / {label} | {len(selected)} representative images",
         )
 
     readable = sum(1 for x in validation if x["status"] == "OK")
     errors = len(validation) - readable
     dimensions = Counter(
-        (r["width"], r["height"])
-        for r in manifest
-        if r["width"] != "" and r["height"] != ""
+        (r["width"], r["height"]) for r in manifest if r["width"] != "" and r["height"] != ""
     )
 
     report = {
@@ -297,16 +299,15 @@ def main():
         "files_in_exact_duplicate_groups": duplicate_files,
         "possible_train_test_exact_hash_leakage_groups": len(leakage_hashes),
         "common_image_dimensions_top_20": [
-            {"width": w, "height": h, "count": c}
-            for (w, h), c in dimensions.most_common(20)
+            {"width": w, "height": h, "count": c} for (w, h), c in dimensions.most_common(20)
         ],
         "notes": [
             "Folder labels are recorded as dataset-provided labels.",
             "Species/genus/taxonomy are NOT inferred from filenames.",
             "No original image files were modified.",
             "Exact duplicate detection uses SHA-256.",
-            "The train/test leakage check detects exact duplicate files by SHA-256 only; it does not detect visually similar near-duplicates."
-        ]
+            "The train/test leakage check detects exact duplicate files by SHA-256 only; it does not detect visually similar near-duplicates.",
+        ],
     }
 
     with (out / "dataset_report.json").open("w", encoding="utf-8") as f:

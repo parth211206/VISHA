@@ -1,7 +1,9 @@
-from pydantic import BaseModel, ConfigDict
 from datetime import datetime
-from uuid import UUID
 from typing import Optional
+from uuid import UUID
+
+from pydantic import BaseModel, ConfigDict
+
 
 class SurveillanceRecordBase(BaseModel):
     case_id: Optional[UUID] = None
@@ -17,12 +19,14 @@ class SurveillanceRecordBase(BaseModel):
     outcome: Optional[str] = None
     antivenom_given: Optional[bool] = None
 
+
 class SurveillanceRecordCreate(SurveillanceRecordBase):
     pass
+
 
 class SurveillanceRecordResponse(SurveillanceRecordBase):
     id: UUID
     is_verified: bool
     created_at: datetime
-    
+
     model_config = ConfigDict(from_attributes=True)

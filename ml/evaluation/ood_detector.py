@@ -1,6 +1,8 @@
-import numpy as np
-from pathlib import Path
 import json
+from pathlib import Path
+
+import numpy as np
+
 
 class MahalanobisOODDetector:
     def __init__(self, threshold_percentile: float = 95.0):
@@ -13,14 +15,14 @@ class MahalanobisOODDetector:
         self.mean = np.mean(features, axis=0)
         cov = np.cov(features, rowvar=False)
         self.cov_inv = np.linalg.pinv(cov)
-        
+
         scores = self.score(features)
         self.threshold = np.percentile(scores, self.threshold_percentile)
 
     def score(self, features: np.ndarray) -> np.ndarray:
         if self.mean is None or self.cov_inv is None:
             raise ValueError("OOD Detector is not fitted.")
-            
+
         diff = features - self.mean
         # Mahalanobis distance squared
         m_dist_sq = np.sum(np.dot(diff, self.cov_inv) * diff, axis=1)
@@ -35,7 +37,7 @@ class MahalanobisOODDetector:
             "threshold_percentile": self.threshold_percentile,
             "threshold": float(self.threshold),
             "mean": self.mean.tolist(),
-            "cov_inv": self.cov_inv.tolist()
+            "cov_inv": self.cov_inv.tolist(),
         }
         with open(path, "w") as f:
             json.dump(data, f)

@@ -1,11 +1,14 @@
-import yaml
 from pathlib import Path
+
+import yaml
+
 try:
     import torch
-    import torch.nn as nn
-    from torchvision.models import efficientnet_b3, EfficientNet_B3_Weights
+    from torch import nn
+    from torchvision.models import EfficientNet_B3_Weights, efficientnet_b3
 except ImportError:
     nn = object
+
 
 class BinarySnakeClassifier(nn.Module if nn is not object else object):
     """
@@ -13,27 +16,27 @@ class BinarySnakeClassifier(nn.Module if nn is not object else object):
     Architecture: EfficientNet-B3 backbone.
     This model does NOT perform species identification.
     """
-    
+
     def __init__(self, config: dict, num_classes: int = 2):
         super().__init__()
         self.config = config
         self.num_classes = num_classes
-        
+
         pretrained = config.get("model", {}).get("pretrained", True)
         weights = EfficientNet_B3_Weights.DEFAULT if pretrained else None
-        
+
         self.backbone = efficientnet_b3(weights=weights)
-        
+
         # Replace classifier head
         in_features = self.backbone.classifier[1].in_features
         dropout_p = config.get("model", {}).get("dropout", 0.3)
-        
+
         self.backbone.classifier = nn.Sequential(
             nn.Dropout(p=dropout_p, inplace=True),
             nn.Linear(in_features, 512),
             nn.ReLU(inplace=True),
             nn.Dropout(p=dropout_p, inplace=True),
-            nn.Linear(512, num_classes)
+            nn.Linear(512, num_classes),
         )
 
     def forward(self, x):
