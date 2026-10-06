@@ -1,74 +1,67 @@
-# Snake Dataset -> Claude Preparation Package
+# VISHA — India Snakebite AI Decision-Support & Surveillance System
 
-## What this package does
+An AI-assisted clinical decision-support and epidemiological surveillance system for snakebite management in India.
 
-It creates a structured description of the existing snake image dataset without uploading the complete image collection.
+## Overview
 
-The original images remain on the PC.
+Snakebite envenoming is a major public-health problem in India, where rapid identification of the likely snake, assessment of clinical symptoms, and timely treatment decisions can be critical.
 
-## Files
+**VISHA** aims to provide a unified AI-assisted system that can support clinicians and healthcare professionals by combining:
 
-- `dataset_inspector.py` - scans the dataset
-- `run_dataset_inspector.bat` - Windows one-click runner
-- `DATASET_CONTRACT.md` - rules for interpreting the dataset
-- `CLAUDE_DATASET_INSTRUCTIONS.md` - instructions to give Claude
+- Snake species identification from images
+- Clinical symptom and syndrome analysis
+- Envenomation risk assessment
+- Antivenom-related decision support
+- Geographic and epidemiological intelligence
+- Snake occurrence and distribution data
+- Evidence-based clinical information
+- Surveillance and reporting capabilities
 
-After running the inspector, it creates:
+> **Important:** This project is a research/prototype system and is not intended to replace qualified medical professionals or established clinical protocols.
 
-```text
-C:\AI_ML_Project\Snake Images\dataset_documentation\
-    dataset_manifest.csv
-    dataset_report.json
-    validation_report.csv
-    class_distribution.csv
-    duplicate_report.csv
-    sample_images\
-```
+---
 
-## First-time setup
+## Project Objectives
 
-Open Command Prompt and run:
+The project focuses on developing an integrated pipeline that can:
 
-```text
-python -m pip install Pillow
-```
+1. Analyze snake images and identify the most likely species.
+2. Process clinical signs and symptoms associated with snakebite.
+3. Estimate potential envenomation risk.
+4. Combine visual, clinical, geographic, and epidemiological evidence.
+5. Provide structured decision-support information for healthcare professionals.
+6. Support epidemiological surveillance and analysis.
+7. Maintain traceable evidence and reasoning wherever possible.
 
-Then run:
+---
 
-```text
-python dataset_inspector.py
-```
-
-or double-click:
+## System Concept
 
 ```text
-run_dataset_inspector.bat
-```
-
-The script is configured for:
-
-```text
-C:\AI_ML_Project\Snake Images
-```
-
-You can also supply another path:
-
-```text
-python dataset_inspector.py "D:\Some\Other\Snake Dataset"
-```
-
-## Safety
-
-The inspector:
-
-- does not rename original images
-- does not move original images
-- does not delete original images
-- does not overwrite original images
-- writes derived documentation to `dataset_documentation`
-
-## Important limitation
-
-The inspector can validate files and folder labels, but it cannot establish that a snake is a particular species merely from its appearance.
-
-Species/genus metadata must come from a verified annotation/source.
+                 ┌─────────────────────┐
+                 │   Patient / Case    │
+                 │      Input          │
+                 └──────────┬──────────┘
+                            │
+             ┌──────────────┼──────────────┐
+             ▼              ▼              ▼
+      ┌────────────┐ ┌────────────┐ ┌────────────┐
+      │ Snake      │ │ Clinical   │ │ Geographic │
+      │ Image      │ │ Symptoms   │ │ Information│
+      └─────┬──────┘ └─────┬──────┘ └─────┬──────┘
+            │              │              │
+            ▼              ▼              ▼
+      ┌─────────────────────────────────────────┐
+      │          AI / Evidence Pipeline          │
+      └────────────────────┬────────────────────┘
+                           │
+                           ▼
+                ┌──────────────────────┐
+                │ Risk & Clinical      │
+                │ Decision Support     │
+                └──────────┬───────────┘
+                           │
+              ┌────────────┴────────────┐
+              ▼                         ▼
+       Clinical Support          Epidemiological
+                                  Surveillance
