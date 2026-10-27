@@ -1,0 +1,15 @@
+- product_name: "Indian polyvalent ASV (historical category reference; not manufacturer-specific)"
+  manufacturer: null
+  target_species:
+    - "Naja naja"
+    - "Bungarus caeruleus"
+    - "Daboia russelii"
+    - "Echis carinatus"
+  geographic_scope: "India"
+  formulation: "General polyvalent ASV category only; manufacturer-specific formulation not established."
+  source_citation: "https://clinicalestablishments.mohfw.gov.in/sites/default/files/standard-treatment-guidelines/3941.pdf"
+  source_version: "Government of India Standard Treatment Guidelines: Snakebite, June 2016; historical source requiring currentness review."
+  source_date: "June 2016"
+  evidence_status: "OFFICIAL_HISTORICAL_GUIDANCE_ONLY; CURRENT_PRODUCT_COVERAGE_NOT_VERIFIED"
+  notes: "Historical government guidance discusses antivenom targeting the listed species. This is not a manufacturer-specific product record, current product label, treatment recommendation, or confirmation of clinical effectiveness in any individual case. Other medically important species occur in India, and the traditional Big Four classification is not exhaustive. Qualified clinical and pharmacy review is required to establish current product-specific coverage and applicability."
+  verification_status: "SOURCE_VERIFIED"

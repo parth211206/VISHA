@@ -31,3 +31,24 @@ class AntivenomFacility(Base, UUIDMixin):
     created_at: Mapped[datetime] = mapped_column(
         TIMESTAMP(timezone=True), server_default=func.now(), nullable=False
     )
+
+    # FACILITY_GEOGRAPHIC_COORDINATES
+    @property
+    def latitude(self):
+        if self.coordinates is None:
+            return None
+        try:
+            from geoalchemy2.shape import to_shape
+            return float(to_shape(self.coordinates).y)
+        except (TypeError, ValueError, AttributeError):
+            return None
+
+    @property
+    def longitude(self):
+        if self.coordinates is None:
+            return None
+        try:
+            from geoalchemy2.shape import to_shape
+            return float(to_shape(self.coordinates).x)
+        except (TypeError, ValueError, AttributeError):
+            return None

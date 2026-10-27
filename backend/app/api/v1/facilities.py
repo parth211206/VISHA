@@ -1,6 +1,7 @@
+from typing import List
 from uuid import UUID
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.security import get_current_user
@@ -16,6 +17,16 @@ from app.services.facility_service import FacilityService
 router = APIRouter()
 audit_service = AuditService()
 facility_service = FacilityService(audit_service)
+
+
+@router.get("/", response_model=List[AntivenomFacilityResponse])
+async def list_facilities(
+    skip: int = Query(default=0, ge=0),
+    limit: int = Query(default=100, ge=1, le=500),
+    db: AsyncSession = Depends(get_db),
+    current_user: dict = Depends(get_current_user),
+):
+    return await facility_service.get_facilities(db, skip=skip, limit=limit)
 
 
 @router.post("/", response_model=AntivenomFacilityResponse)

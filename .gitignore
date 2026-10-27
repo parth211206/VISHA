@@ -121,3 +121,10 @@ data/processed/**/*.feather
 # - data/clinical/   (YAML reference files)
 # - data/antivenom/  (YAML reference files)
 # - Original datasets (they are READ-ONLY, not in this repo anyway)
+.claude/worktrees/
+*.bak*
+**/SnakeCLEF*.csv
+data/**/*.jpg
+data/**/*.jpeg
+data/**/*.png
+/C*Tempaudit_dataset.py

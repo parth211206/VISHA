@@ -1,0 +1,78 @@
+version: "1.0.0"
+model:
+  architecture: "efficientnet_b3"
+  pretrained: true
+  num_classes: 2  # binary: venomous | non_venomous
+  dropout: 0.3
+  freeze_backbone_epochs: 2  # only train head for first N epochs
+
+training:
+  epochs: 2
+  batch_size: 16
+  learning_rate: 1e-4
+  weight_decay: 1e-5
+  scheduler: "cosine_annealing"
+  T_max: 2
+  warmup_epochs: 0
+  gradient_clip_max_norm: 1.0
+  class_weights: "auto"  # compute from training distribution
+
+  early_stopping:
+    enabled: false
+    patience: 7
+    monitor: "val_loss"
+    mode: "min"
+
+  random_seed: 42
+
+augmentation:
+  train:
+    random_resized_crop: 300
+    horizontal_flip: 0.5
+    vertical_flip: 0.2
+    random_rotation: 15
+    color_jitter:
+      brightness: 0.2
+      contrast: 0.2
+      saturation: 0.1
+    normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+  val:
+    resize: 320
+    center_crop: 300
+    normalize:
+      mean: [0.485, 0.456, 0.406]
+      std: [0.229, 0.224, 0.225]
+
+paths:
+  manifest: "data/manifests/image_manifest_v1_leakage_safe.csv"
+  image_root: "Snake Images"
+  artifacts_dir: "ml/artifacts"
+  experiments_dir: "ml/runs"
+
+calibration:
+  enabled: true
+  method: "temperature_scaling"
+  val_split_from_train: 0.15  # holdout from training data for calibration
+
+ood:
+  method: "mahalanobis"
+  threshold_percentile: 95  # OOD if score > 95th percentile of training dist
+
+evaluation:
+  confusion_pairs:
+    - ["venomous", "non_venomous"]  # The only pair at binary level
+  metrics:
+    - accuracy
+    - balanced_accuracy
+    - precision_macro
+    - recall_macro
+    - f1_macro
+    - roc_auc
+    - sensitivity  # recall for venomous class
+    - specificity  # recall for non_venomous class
+    - ppv
+    - npv
+  # Clinical priority: sensitivity (venomous recall) is most important
+  primary_metric: "sensitivity"

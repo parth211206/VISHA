@@ -1,0 +1,5 @@
+# Optional ML runtime dependencies. Install this file only if PyTorch/NumPy imports fail.
+# The final compatible PyTorch + torchvision wheels depend on the local Python/Windows setup.
+numpy>=1.26
+torch
+torchvision

@@ -43,6 +43,7 @@ class ExperimentTracker:
 
     def log_epoch(self, experiment_id: str, epoch: int, train_metrics: dict, val_metrics: dict):
         exp_dir = self.experiments_dir / experiment_id
+        exp_dir.mkdir(parents=True, exist_ok=True)
         metrics_file = exp_dir / "metrics.jsonl"
 
         data = {

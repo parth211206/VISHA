@@ -3,6 +3,7 @@ from pathlib import Path
 
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
 
 
 class AppSettings(BaseModel):
@@ -13,7 +14,12 @@ class AppSettings(BaseModel):
 
 
 class DatabaseSettings(BaseModel):
-    url: str = "postgresql+asyncpg://snakebite:snakebite_dev_password@localhost:5432/snakebite_dev"
+    url: str = Field(
+        default_factory=lambda: os.getenv(
+            "DATABASE_URL",
+            "postgresql+asyncpg://snakebite:snakebite_dev_password@localhost:5432/snakebite_dev"
+        )
+    )
     pool_size: int = 10
     max_overflow: int = 20
 

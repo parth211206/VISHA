@@ -32,10 +32,10 @@ class BinarySnakeClassifier(nn.Module if nn is not object else object):
         dropout_p = config.get("model", {}).get("dropout", 0.3)
 
         self.backbone.classifier = nn.Sequential(
-            nn.Dropout(p=dropout_p, inplace=True),
+            nn.Dropout(p=dropout_p, inplace=False),
             nn.Linear(in_features, 512),
-            nn.ReLU(inplace=True),
-            nn.Dropout(p=dropout_p, inplace=True),
+            nn.ReLU(inplace=False),
+            nn.Dropout(p=dropout_p, inplace=False),
             nn.Linear(512, num_classes),
         )
 

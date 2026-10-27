@@ -1,0 +1,39 @@
+- reference_id: INDIA_STG_2017
+  title: India Standard Treatment Guidelines for Management of Snake Bite
+  issuing_organization: Government of India, Ministry of Health and Family Welfare
+  document_date_or_version: August 2017
+  official_url: https://ncdc.mohfw.gov.in/uploads/pdf/Standard-Treatment-Guidelines-for-Management-of-Snake-Bite.pdf
+  source_status: OFFICIAL_GOVERNMENT_SOURCE
+  clinical_review_status: CURRENTNESS_REQUIRES_CLINICIAN_REVIEW
+  last_reviewed: null
+  notes: "National government guideline for snakebite management in India. Requires clinician review for applicability to individual cases."
+
+- reference_id: NPPCSE_2024
+  title: National Programme for Prevention and Control of Snakebite Envenoming
+  issuing_organization: National Centre for Disease Control, Government of India
+  document_date_or_version: null
+  official_url: https://ncdc.mohfw.gov.in/includes/About/CentresAndDivision/NPPCSE.php
+  source_status: OFFICIAL_SOURCE_CLINICAL_REVIEW_PENDING
+  clinical_review_status: OFFICIAL_SOURCE_CLINICAL_REVIEW_PENDING
+  last_reviewed: null
+  notes: "National programme page describing India's snakebite envenoming prevention and control efforts. Clinical review status pending."
+
+- reference_id: WHO_SNAKEBITE_2016
+  title: WHO Guidelines for the Management of Snakebites, second edition
+  issuing_organization: World Health Organization
+  document_date_or_version: "2016"
+  official_url: https://www.who.int/publications/i/item/9789290225300
+  source_status: INTERNATIONAL_GUIDELINE
+  clinical_review_status: VERSION_REVIEW_REQUIRED
+  last_reviewed: null
+  notes: "Second edition WHO guideline on snakebite management. Published 2016. Requires review for current applicability."
+
+- reference_id: NCDC_PHC_CHC_PROTOCOL
+  title: NCDC Protocol for Initial Management of Snake Bite at Health Facilities (PHC/CHC)
+  issuing_organization: National Centre for Disease Control, Government of India
+  document_date_or_version: null
+  official_url: https://ncdc.mohfw.gov.in/uploads/pdf/PEP-Protocol.pdf
+  source_status: OFFICIAL_GOVERNMENT_SOURCE
+  clinical_review_status: CURRENTNESS_REQUIRES_CLINICIAN_REVIEW
+  last_reviewed: null
+  notes: "India-specific protocol for initial snakebite management at Primary Health Centres and Community Health Centres. Requires clinician review for applicability."

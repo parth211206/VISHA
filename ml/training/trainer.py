@@ -67,7 +67,7 @@ class BinaryClassifierTrainer:
         all_probs = []
 
         with torch.no_grad():
-            for inputs, labels, _ in enumerate(self.val_loader):
+            for inputs, labels, _ in self.val_loader:
                 inputs, labels = inputs.to(self.device), labels.to(self.device)
                 logits = self.model(inputs)
                 loss = self.criterion(logits, labels)

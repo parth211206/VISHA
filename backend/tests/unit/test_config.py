@@ -32,3 +32,17 @@ def test_get_settings_is_cached():
     s1 = get_settings()
     s2 = get_settings()
     assert s1 is s2
+
+
+def test_database_url_default(monkeypatch):
+    # Ensure DATABASE_URL is not set
+    monkeypatch.delenv("DATABASE_URL", raising=False)
+    settings = Settings()
+    assert settings.database.url == "postgresql+asyncpg://snakebite:snakebite_dev_password@localhost:5432/snakebite_dev"
+
+
+def test_database_url_override(monkeypatch):
+    test_url = "sqlite+aiosqlite:///./test.db"
+    monkeypatch.setenv("DATABASE_URL", test_url)
+    settings = Settings()
+    assert settings.database.url == test_url

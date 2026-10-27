@@ -8,6 +8,8 @@ class VerificationStatus(str, Enum):
     UNVERIFIED = "UNVERIFIED"
     PLACEHOLDER = "PLACEHOLDER"
     SOURCE_REQUIRED = "SOURCE_REQUIRED"
+    SOURCE_VERIFIED = "SOURCE_VERIFIED"
+    CLINICIAN_REVIEWED = "CLINICIAN_REVIEWED"
 
 
 class AntivenomReference(BaseModel):

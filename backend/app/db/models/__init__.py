@@ -2,6 +2,7 @@ from .audit import AuditLog
 from .case import Case
 from .clinical import ClinicalEvidence
 from .facility import AntivenomFacility
+from .inventory import AntivenomInventory
 from .prediction import CasePrediction
 from .review import ClinicianReview
 from .surveillance import SurveillanceRecord

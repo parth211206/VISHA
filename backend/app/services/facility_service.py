@@ -1,6 +1,7 @@
 from typing import List
 from uuid import UUID
 
+from geoalchemy2.elements import WKTElement
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -8,6 +9,16 @@ from app.core.exceptions import DataNotFoundError
 from app.db.models.facility import AntivenomFacility
 from app.schemas.facility import AntivenomFacilityCreate, AntivenomFacilityUpdate
 from app.services.audit_service import AuditService
+
+
+def _audit_user_id(current_user: dict) -> UUID | None:
+    raw = current_user.get("id")
+    if raw is None:
+        return None
+    try:
+        return raw if isinstance(raw, UUID) else UUID(str(raw))
+    except (TypeError, ValueError, AttributeError):
+        return None
 
 
 class FacilityService:
@@ -30,14 +41,26 @@ class FacilityService:
     async def create_facility(
         self, db: AsyncSession, facility_in: AntivenomFacilityCreate, current_user: dict
     ) -> AntivenomFacility:
-        facility = AntivenomFacility(**facility_in.model_dump())
+        facility_data = facility_in.model_dump(
+            exclude={"latitude", "longitude"}
+        )
+
+        coordinates = None
+        if facility_in.latitude is not None and facility_in.longitude is not None:
+            coordinates = WKTElement(
+                f"POINT({facility_in.longitude} {facility_in.latitude})",
+                srid=4326,
+            )
+
+        facility = AntivenomFacility(
+            **facility_data,
+            coordinates=coordinates,
+        )
         db.add(facility)
         await db.flush()
 
         await self.audit_service.log_action(
-            user_id=UUID(current_user["id"])
-            if isinstance(current_user.get("id"), str)
-            else current_user.get("id"),
+            user_id=_audit_user_id(current_user),
             action="CREATE_FACILITY",
             payload={"facility_name": facility.name},
             db=db,
@@ -58,13 +81,28 @@ class FacilityService:
         facility = await self.get_facility(db, facility_id)
 
         update_data = facility_in.model_dump(exclude_unset=True)
+
+        coordinates_changed = (
+            "latitude" in update_data or "longitude" in update_data
+        )
+        latitude = update_data.pop("latitude", None)
+        longitude = update_data.pop("longitude", None)
+
         for field, value in update_data.items():
             setattr(facility, field, value)
 
+        if coordinates_changed:
+            if latitude is None and longitude is None:
+                # Explicitly clearing both fields clears the map location.
+                facility.coordinates = None
+            else:
+                facility.coordinates = WKTElement(
+                    f"POINT({longitude} {latitude})",
+                    srid=4326,
+                )
+
         await self.audit_service.log_action(
-            user_id=UUID(current_user["id"])
-            if isinstance(current_user.get("id"), str)
-            else current_user.get("id"),
+            user_id=_audit_user_id(current_user),
             action="UPDATE_FACILITY",
             payload={"fields_updated": list(update_data.keys())},
             db=db,
